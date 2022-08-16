@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <title>Pizza</title>
+</head>
+<body class="bg-warning bg-opacity-25 pt-3">
+    <div class="container">
+        <h2 class="h1 fs-2 text-center text-secondary text-opacity-25">Pitsa buyurtma qilish</h2>
+        <div class="row">
+            <div class="col-md-8 border-end border-2 border-secondary">
+                <form class="form" action="https://echo.htmlacademy.ru" id="form">
+                    <div class="row">
+                        <div class="col-12 mb-3">
+                            <p class="text text-black text-opacity-50 fw-bold fs-5 mb-0">Noni qanday bo'lsin?</p>
+                            <select class="form-select w-50 select-form " name="Volume">
+                                <option value="" hidden>Tanlang</option>
+                            </select>
+                        </div>
+
+                        <div class="col-12 mb-3">
+                            <p class="text text-black text-opacity-50 fw-bold fs-5 mb-0">Kattaligi</p>
+                            <div class="form-input-radio"></div>
+                        </div>
+
+                        <div class="col-12 mb-3">
+                            <p class="text text-black text-opacity-50 fw-bold fs-5 mb-0">Unnga nima solaylik</p>
+                            <div class="form-input-check row"></div>
+                        </div>
+
+                        <div class="col-12 mb-3">
+                            <p class="text text-black text-opacity-50 fw-bold fs-5 mb-0">Qo'shimcha</p>
+                            <div class="form-input-check row"></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-4">
+                <div class="col-12 mb-3">
+                    <p class="answer-text text-black fw-bold fs-5 mb-0 ">Non: <span class="select-span text-black text-opacity-50 fw-bold fs-6"></span></p>
+                </div>
+
+                <div class="col-12 mb-3">
+                    <p class="answer-text text-black fw-bold fs-5 mb-0">Kattaligi:<span class="select-span text-black text-opacity-50 fw-bold fs-6"></span></p>
+                </div>
+
+                <div class="col-12 mb-3">
+                    <p class="answer-text text-black fw-bold fs-5 mb-0">Ustida:</p>
+
+                    <ul class="list-group list-group-flush list" style="min-height: 248px;">
+                        <!-- <li class="list-group-item bg-warning bg-opacity-10">salom</li> -->
+                    </ul>
+                </div>
+
+                <div class="col-12 mb-3">
+                    <p class="answer-text text-black fw-bold fs-5 mb-0">Qo'shimcha:</p>
+
+                    <ul class="list-group list-group-flush list2 " style="min-height: 83px;">
+                    </ul>
+                </div>
+
+                <div class="col-12 mt-3 d-flex justify-content-center">
+                    <button class="btn btn-success" form="form">Buyurtma berish</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/script.js"></script>
+</body>
+</html>
