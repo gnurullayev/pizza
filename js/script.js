@@ -43,6 +43,7 @@ for(let i = 0; i < selectArr.length; i++) {
     let elOption = document.createElement("option");
     elOption.textContent= selectArr[i];
     elOption.value = selectArr[i];
+
     elFormSelect.appendChild(elOption);
 }
 
@@ -130,3 +131,7 @@ for (let i = 0; i < checkArr2.length; i++) {
         console.log(orderBottoms);
     })
 }
+
+elFormSelect.addEventListener("change", function () {
+    selectSpan[0].textContent = this.value;
+})
