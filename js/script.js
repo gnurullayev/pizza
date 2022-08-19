@@ -1,3 +1,13 @@
+
+let selectArr = ["Yupqa", "Qalin", "O'rta"];
+let radioArr = ["25 cm", "30 cm", "35 cm"];
+let checkArr1 = [ "Pamidor" ,"Tuzlangan bodiring" ,"Kurka go'shti","Qo'ziqorin","Zaytun","Qazi"];
+let checkArr2 = [ "Achchiq" ,"Sosiskali"];
+
+let orderToppings = [];
+let orderBottoms = [];
+
+
 let elForm = document.querySelector(".form");
 let elFormSelect = elForm.querySelector(".select-form");
 let elInputRadio = elForm.querySelector(".form-input-radio");
@@ -6,7 +16,29 @@ let selectSpan = document.querySelectorAll(".select-span");
 let elList = document.querySelector(".list");
 let elList2 = document.querySelector(".list2");
 
-let selectArr = ["Yupqa", "Qalin", "O'rta"];
+function showOrderItems () {
+    elList.innerHTML = "";
+
+    for (let i = 0; i < orderToppings.length; i++) {
+        let elOrderingItem = document.createElement("li");
+        elOrderingItem.setAttribute("class", "list-group-item bg-warning bg-opacity-10 d-flex list-item justify-content-between align-items-center");
+        elOrderingItem.textContent = orderToppings[i];
+
+        elList.appendChild(elOrderingItem);
+    }
+}
+
+function addOrederBottomItem () {
+    elList2.innerHTML = ""
+    for (let i = 0; i < orderBottoms.length; i++) {
+        let elOrderBottomItem = document.createElement("li");
+        elOrderBottomItem.setAttribute("class", "list-group-item bg-warning bg-opacity-10 d-flex list-item justify-content-between align-items-center");
+        elOrderBottomItem.textContent = orderBottoms[i];
+
+        elList2.appendChild(elOrderBottomItem);
+    }
+}
+
 for(let i = 0; i < selectArr.length; i++) {
     let elOption = document.createElement("option");
     elOption.textContent= selectArr[i];
@@ -14,7 +46,6 @@ for(let i = 0; i < selectArr.length; i++) {
     elFormSelect.appendChild(elOption);
 }
 
-let radioArr = ["25 cm", "30 cm", "35 cm"];
 for (let i = 0; i < radioArr.length; i++) {
     let elFormRadioBox = document.createElement("label");
     let elFormRadioInput = document.createElement("input");
@@ -26,6 +57,10 @@ for (let i = 0; i < radioArr.length; i++) {
 
     elFormRadioInput.value = radioArr[i];
     elFormRadioBox.textContent = radioArr[i];
+
+    elFormRadioInput.addEventListener("change", function () {
+        selectSpan[1].textContent = this.value;
+    })
 
     elInputRadio.appendChild(elFormRadioBox);
     elFormRadioBox.appendChild(elFormRadioInput);
@@ -39,8 +74,7 @@ for (let i = 0; i < radioArr.length; i++) {
     elFormRadioInput.style.opacity = "0"
 }
 
-let checkArr1 = [ {id:1, text: "Pamidor"} ,{id:2, text: "Tuzlangan bodiring"} ,{id:3, text: "Kurka go'shti"},{id:4, text: "Qo'ziqorin"},{id:5, text: "Zaytun"},{id:6, text: "Qazi"}];
-for(let i = 0; i < checkArr1.length; i++) {
+for (let i = 0; i < checkArr1.length; i++) {
     let elFormCheckBox = document.createElement("label");
     let elFormCheckInput = document.createElement("input");
 
@@ -49,16 +83,27 @@ for(let i = 0; i < checkArr1.length; i++) {
     elFormCheckInput.setAttribute("name", "Pizza toppings")
     elFormCheckBox.setAttribute("class", "col-md-6 form-check-label fs-5")
 
-    elFormCheckInput.value = checkArr1[i].text;
-    elFormCheckBox.textContent = checkArr1[i].text;
+    elFormCheckInput.value = checkArr1[i];
+    elFormCheckBox.textContent = checkArr1[i];
 
     elInputCheck[0].append(elFormCheckBox);
     elFormCheckBox .prepend(elFormCheckInput);
+
+    elFormCheckInput.addEventListener("change", function () {
+        if (orderToppings.includes(this.value)) {
+            let OrderItemIndex = orderToppings.indexOf(this.value);
+            orderToppings.splice(OrderItemIndex,1)
+
+        }else {
+            orderToppings.push(this.value)
+        }
+
+        showOrderItems()
+        console.log(orderToppings);
+    })
 }
 
-let checkArr2 = [{id:1, text: "Achchiq"} ,{id:2, text: "Sosiskali"}];
 for (let i = 0; i < checkArr2.length; i++) {
-    
     let elFormCheckBox = document.createElement("label");
     let elFormCheckInput = document.createElement("input");
 
@@ -67,72 +112,21 @@ for (let i = 0; i < checkArr2.length; i++) {
     elFormCheckInput.setAttribute("class", "form-check-input form-check-input2 me-2")
     elFormCheckBox.setAttribute("class", "col-md-6 form-check-label fs-5")
 
-    elFormCheckInput.value = checkArr2[i].text;
-    elFormCheckBox.textContent = checkArr2[i].text;
+    elFormCheckInput.value = checkArr2[i];
+    elFormCheckBox.textContent = checkArr2[i];
 
     elInputCheck[1].append(elFormCheckBox);
     elFormCheckBox .prepend(elFormCheckInput);
-}
 
-elFormSelect.addEventListener("change", function () {
-    selectSpan[0].textContent = elFormSelect.value;    
-})
-
-elInputRadio.addEventListener("change", function (event) {
-    selectSpan[1].textContent = event.target.value;
-})
-
-let arr = [];
-let pizzaUst = document.querySelectorAll(".form-check-input1");
-for (let index = 0; index < pizzaUst.length; index++) {
-    
-    let elListItem = document.createElement("li");
-    pizzaUst[index].addEventListener("change", function () {
-        elListItem.setAttribute("class", "list-group-item bg-warning bg-opacity-10 d-flex list-item justify-content-between align-items-center")
-        
-        if (pizzaUst[index].checked) {
-            arr.push(checkArr1[index]);
-        
-            for(let i = 0; i < arr.length; i++) {
-                elListItem.innerHTML= arr[i].text;
-                elList.appendChild(elListItem);         
-            }
-        }
-        else if (pizzaUst[index].checked === false) {
-            for(let i = 0; i < arr.length; i++) {
-                if(arr[i].id === (index+1)) {
-                    arr.splice(i,1);
-                }
-            }
-            elList.removeChild(elListItem);
-        }
-        
-        console.log(arr);  
-    })
-}
-
-let pizzaTopping = document.querySelectorAll(".form-check-input2");
-let arr2 = [];
-for(let i = 0; i < pizzaTopping.length; i++) {
-    let pizzaToppingItem = document.createElement("li");
-    pizzaToppingItem.setAttribute("class", "list-group-item bg-warning bg-opacity-10 d-flex list-item justify-content-between align-items-center")
-    
-    pizzaTopping[i].addEventListener("change", function () {
-
-        if(pizzaTopping[i].checked) {
-            arr2.push(checkArr2[i]);
-
-            for(let el = 0; el < arr2.length; el++) {
-                pizzaToppingItem.textContent = arr2[el].text;
-                elList2.appendChild(pizzaToppingItem)
-            }
-        }
-        else if(arr2[i].id === (i+1)) {
-            arr2.splice(i,1)
-            elList2.removeChild(pizzaToppingItem)
-
+    elFormCheckInput.addEventListener("change",function () {
+        if(orderBottoms.includes(this.value)) {
+            let orderBottomItemIndex = orderBottoms.indexOf(this.value);
+            orderBottoms.splice(orderBottomItemIndex,1)
+        }else {
+            orderBottoms.push(this.value);
         }
 
-        console.log(arr2);
+        addOrederBottomItem()
+        console.log(orderBottoms);
     })
 }
